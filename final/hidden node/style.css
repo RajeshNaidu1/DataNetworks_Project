@@ -1,0 +1,141 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+}
+  
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: calc(10px + 2vmin);
+}
+
+.simulation{
+    width: 100vw;
+    max-width: 500px;
+    height: 350px;
+    position: relative;
+}  
+.text{
+    position: absolute;
+    top:10;
+    font-size: 18px;
+    font-weight: bold;
+    left:50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    color: #e5e9eb;
+}
+
+  .transmission-Info{
+    background-color: wheat;
+    padding: 1rem;
+    margin: .5rem;
+    color: black;
+    width: 95vw;
+    max-width: 450px;
+  }
+
+.text{
+    z-index: 10000;
+    color: black;
+}
+
+.buttons{
+    display: flex;
+    gap: 0.5rem;
+    margin: 1rem;
+}
+label{
+  font-size: 13px;
+  left: 10px;
+  top: 5px;
+  position: absolute;
+}
+.input-bar{
+  display: flex;
+  align-items: center;
+  color: white;
+  background-color: #1bfff751;
+  padding: .5rem;
+  padding-top: 1.5rem;
+  border-radius: 1rem;
+  position: relative;
+}
+.input{
+  background-color: #0074d9;
+  border: 1px black solid;
+  border-radius: 1rem;
+  width: 100px;
+  text-align: center;
+  padding: .5rem;
+  font-size: 1rem;
+  margin: 5px;
+}
+.hidden-node{
+  display: flex;
+  height: 400px;
+  justify-content: center;
+  align-items: center;
+}
+.input[type="number"]::-webkit-inner-spin-button{
+  display: none;
+}
+option{
+  text-align: center;
+  padding: 1rem;
+  margin: 15px 0;
+}
+.node{
+  background-color: blue;
+  color: white;
+  display: flex;
+  z-index: 2000;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid white;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  position: relative;
+}
+.wave{
+  border: 2px solid red;
+  background-color: transparent;
+  width: 0;
+  height: 0;
+  position: absolute;
+  border-radius: 50%;
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+.node#A{
+  left: -10%;
+}
+.node#C{
+  left: 10%;
+}
+.coverage{
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  z-index: -1;
+  content: "";
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  transform-origin: center;
+  background: rgba( 255, 255, 255, 0.25 );
+  border: 1px solid rgba( 255, 255, 255, 0.28 );
+  border-radius: 50%;
+}
