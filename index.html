@@ -136,7 +136,7 @@ nav{
       Receiver:<br>
       Rule 1) Send acknowledgement after receiving and consuming a data packet. <br>
       Rule 2) After consuming packet acknowledgement need to be sent (Flow Control) <br><br>
-      <a class="button" href="#">ClickHere</a>
+      <a class="button" href="./stop and wait/index.html">ClickHere</a>
     </p>
 </div>
 <div id="go-back" class="container go-back">
@@ -145,7 +145,7 @@ nav{
         Go-Back-N ARQ is a specific instance of the automatic repeat request (ARQ) protocol, in which the sending process continues to send a number of frames specified by a window size even without receiving an acknowledgement (ACK) packet from the receiver. It is a special case of the general sliding window protocol with the transmit window size of N and receive window size of 1. It can transmit N frames to the peer before requiring an ACK.
         The receiver process keeps track of the sequence number of the next frame it expects to receive. It will discard any frame that does not have the exact sequence number it expects (either a duplicate frame it already acknowledged, or an out-of-order frame it expects to receive later) and will send an ACK for the last correct in-order frame. Once the sender has sent all of the frames in its window, it will detect that all of the frames since the first lost frame are outstanding, and will go back to the sequence number of the last ACK it received from the receiver process and fill its window starting with that frame and continue the process over again.<br>
         Go-Back-N ARQ is a more efficient use of a connection than Stop-and-wait ARQ, since unlike waiting for an acknowledgement for each packet, the connection is still being utilized as packets are being sent. In other words, during the time that would otherwise be spent waiting, more packets are being sent. However, this method also results in sending frames multiple times, if any frame was lost or damaged, or the ACK acknowledging them was lost or damaged, then that frame and all following frames in the send window (even if they were received without error) will be re-sent. To avoid this, Selective Repeat ARQ can be used.<br><br>
-        <a class="button" href="./goBackN/">Click Here</a>
+        <a class="button" href="./goBackN/index.html">Click Here</a>
     </p>
 </div>
 <div id="selective" class="container selective-repeat">
@@ -169,7 +169,7 @@ nav{
         Carrier-sense multiple access with collision detection (CSMA/CD) is a medium access control (MAC) method used most notably in early Ethernet technology for local area networking. It uses carrier-sensing to defer transmissions until no other stations are transmitting. This is used in combination with collision detection in which a transmitting station detects collisions by sensing transmissions from other stations while it is transmitting a frame. When this collision condition is detected, the station stops transmitting that frame, transmits a jam signal, and then waits for a random time interval before trying to resend the frame.[1]
         CSMA/CD is a modification of pure carrier-sense multiple access (CSMA). CSMA/CD is used to improve CSMA performance by terminating transmission as soon as a collision is detected, thus shortening the time required before a retry can be attempted.<br>
         With the growing popularity of Ethernet switches in the 1990s, IEEE 802.3 deprecated Ethernet repeaters in 2011,[2] making CSMA/CD and half-duplex operation less common and less important.<br><br>
-        <a class="button" href="./csma-cd/">Click Here</a>
+        <a class="button" href="./csma-cd/index.html">Click Here</a>
       </p>
 </div>
 <div id="token-bucket" class="container token_bucket">
@@ -180,7 +180,7 @@ nav{
         They may be enqueued for subsequent transmission when sufficient tokens have accumulated in the bucket.
         They may be transmitted, but marked as being non-conformant, possibly to be dropped subsequently if the network is overloaded.
         A conforming flow can thus contain traffic with an average rate up to the rate at which tokens are added to the bucket, and have a burstiness determined by the depth of the bucket. This burstiness may be expressed in terms of either a jitter tolerance, i.e. how much sooner a packet might conform (e.g. arrive or be transmitted) than would be expected from the limit on the average rate, or a burst tolerance or maximum burst size, i.e. how much more than the average level of traffic might conform in some finite period.<br><br>
-        <a class="button" href="./token bucket/">Click Here</a>
+        <a class="button" href="./token bucket/index.html">Click Here</a>
       </p>
 </div>
 <div id="leaky bucket" class="container leaky_bucket">
@@ -189,7 +189,7 @@ nav{
         The leaky bucket is an algorithm based on an analogy of how a bucket with a constant leak will overflow if either the average rate at which water is poured in exceeds the rate at which the bucket leaks or if more water than the capacity of the bucket is poured in all at once. It can be used to determine whether some sequence of discrete events conforms to defined limits on their average and peak rates or frequencies, e.g. to limit the actions associated with these events to these rates or delay them until they do conform to the rates. It may also be used to check conformance or limit to an average rate alone, i.e. remove any variation from the average.
         It is used in packet-switched computer networks and telecommunications networks in both the traffic policing and traffic shaping of data transmissions, in the form of packets,[note 1] to defined limits on bandwidth and burstiness (a measure of the unevenness or variations in the traffic flow). <br>It can also be used as a scheduling algorithm to determine the timing of transmissions that will comply with the limits set for the bandwidth and burstiness applied by the network: see network scheduler. A version of the leaky bucket, the generic cell rate algorithm, is recommended for asynchronous transfer mode (ATM) networks in Usage/Network Parameter Control at user-network interfaces or inter-network interfaces or network-to-network interfaces to protect a network from excessive traffic levels on connections routed through it. <br><br>The generic cell rate algorithm, or an equivalent, may also be used to shape transmissions by a network interface card onto an ATM network (i.e. on the user side of the user-network interface), e.g. to levels below the levels set for Usage/Network Parameter Control in the network to prevent it taking action to further limit that connection. The leaky bucket algorithm is also used in leaky bucket counters, e.g. to detect when the average or peak rate of random or stochastic events or stochastic processes, such as faults or failures, exceed defined limits.
         <br>At least some implementations of the leaky bucket are a mirror image of the Token Bucket algorithm and will, given equivalent parameters, determine exactly the same sequence of events to conform or not conform to the same limits. However, there are at least two different descriptions of the leaky bucket that can and have caused confusion<br><br>
-        <a class="button" href="./leaky bucket/">Click Here</a>
+        <a class="button" href="./leaky bucket/index.html">Click Here</a>
     </p>
 </div>
 <div id="count_infinity" class="container count_infinity">
@@ -198,7 +198,7 @@ nav{
       A Distance Vector Routing(DVR) requires that a router informs its neighbors of topology changes periodically. This algorithm is also well known in the Competitive Programming fraternity as the Bellman-Ford algorithm. The Distance Vector Routing(DVR) protocols have a major issue of Routing Loops because the Bellman-Ford algorithm cannot prevent loops. The Count to Infinity problem arises from the routing loop in this Distance Vector Routing(DVR) network. Such Routing Loops usually occurs when 2 routers send an update together at the same time or when an interface goes down.<br>
       So, there are 3 solutions to solve this count to infinity problem.<br>
       1. Defining infinity<br>2. Split Horizon<br>3. Route Poison<br><br>
-      <a class="button" href="./count_to_infinity/">Click Here</a>
+      <a class="button" href="./count_to_infinity/index.html">Click Here</a>
     </p>
 </div>
 <div id="hidden-node" class="container hiddden_node">
@@ -207,7 +207,7 @@ nav{
         In wireless networking, the hidden node problem or hidden terminal problem occurs when a node can communicate with a wireless access point (AP), but cannot directly communicate with other nodes that are communicating with that AP.[1] This leads to difficulties in medium access control sublayer since multiple nodes can send data packets to the AP simultaneously, which creates interference at the AP resulting in no packet getting through.
         Although some loss of packets is normal in wireless networking, and the higher layers will resend them, if one of the nodes is transferring a lot of large packets over a long period, the other node may get very little goodput.
         Practical protocol solutions exist to the hidden node problem. For example, Request To Send/Clear To Send (RTS/CTS) mechanisms where nodes send short packets to request permission of the access point to send longer data packets. Because responses from the AP are seen by all the nodes, the nodes can synchronize their transmissions to not interfere. However, the mechanism introduces latency, and the overhead can often be greater than the cost, particularly for short data packets.
-        <br><br><a class="button" href="./hidden node/">Click Here</a>
+        <br><br><a class="button" href="./hidden node/index.html">Click Here</a>
     </p>
 </div>
 <div id="exposed-node" class="container exposed_node">
@@ -217,7 +217,7 @@ nav{
         IEEE 802.11 RTS/CTS mechanism helps to solve this problem only if the nodes are synchronized and packet sizes and data rates are the same for both the transmitting nodes. <br>When a node hears an RTS from a neighboring node, but not the corresponding CTS, that node can deduce that it is an exposed node and is permitted to transmit to other neighboring nodes.
         If the nodes are not synchronised (or if the packet sizes are different or the data rates are different) the problem may occur that the sender will not hear the CTS or the ACK during the transmission of data of the second sender.
         The exposed node problem is not an issue in cellular networks as the power and distance between cells is controlled to avoid it.
-        <br><br><a class="button" href="./exposed node/">Click Here</a>
+        <br><br><a class="button" href="./exposed node/index.html">Click Here</a>
     </p>
 </div>
 </section>
