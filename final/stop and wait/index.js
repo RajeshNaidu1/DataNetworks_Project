@@ -134,7 +134,7 @@ class Sender{
     retransmitPackets(){
         for(let i in this.sent){
             console.log(this.sent[i])
-            const packet = new Packet({type:"recieve",seqNo:this.sent[i].seqNo,x:this.sent[i].x})
+            const packet = new Packet({type:"recieve",seqNo:this.sent[i].seqNo,x:this.sent[i].x,dy:packet_speed})
             this.timer.stop()
             this.timer = new Timer({time_out:time_out,x:this.sent[i].x*30})
             this.startTimer()

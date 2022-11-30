@@ -41,7 +41,7 @@ class Node{
 
 const A = new Node("A",300)
 const B = new Node("B",200)
-const C = new Node("C",200)
+const C = new Node("C",300)
 
 nodes["A"] = A
 nodes["B"] = B
@@ -83,6 +83,5 @@ nonCollison.addEventListener('click',()=>{
 
 collison.addEventListener('click',()=>{
    nodes["A"].sendData()
-   nodes["B"].sendData()
    nodes["C"].sendData()
 })
