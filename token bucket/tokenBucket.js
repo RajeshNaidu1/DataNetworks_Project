@@ -273,7 +273,22 @@ function createRecieverPackets(){
 }
 
 
-//tokens are added here
+//bucket to reciever packet here
+
+setInterval(()=>{
+    console.log("queue:",queue);
+    console.log("recieved:",recieved)
+},[1000])
+
+function start(){
+    stopWrapper.style.display = "flex"
+    startWrapper.style.display = "none"
+    const d = setInterval(()=>{
+        if(dataLeft.value<=0 && recieved.length==0 && queue.length==0){clearInterval(d)}
+        createRecieverPackets();
+    },[1000/10])    
+
+    //tokens are added here
 const a = setInterval(()=>{
     if(dataLeft.value<=0 && currentSize<=0 && currentTokens==totalTokens){clearInterval(a)}
     if(currentTokens+tokenQueued<totalTokens) createToken();
@@ -297,20 +312,6 @@ const c = setInterval(()=>{
     if(currentSize>0 && currentTokens>0 ){createTokenPacket();};
 },[1000/5])
 
-//bucket to reciever packet here
-
-setInterval(()=>{
-    console.log("queue:",queue);
-    console.log("recieved:",recieved)
-},[1000])
-
-function start(){
-    stopWrapper.style.display = "flex"
-    startWrapper.style.display = "none"
-    const d = setInterval(()=>{
-        if(dataLeft.value<=0 && recieved.length==0 && queue.length==0){clearInterval(d)}
-        createRecieverPackets();
-    },[1000/10])    
 }
 
 function stop(){
