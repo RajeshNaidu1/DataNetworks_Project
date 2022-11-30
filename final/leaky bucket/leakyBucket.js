@@ -6,8 +6,13 @@ const currentSizeBar = document.getElementById("current-size")
 const progressBar = document.querySelector('.progress');
 const simulation = document.querySelector('.simulation')
 const dataLeft = document.querySelector('#data-left')
+const totalDataSize = document.querySelector("#Data-size")
 const bucketTransmissionBar = document.getElementById("bucket-transmission")
 
+const startSimulation = document.querySelector('#start-simulation')
+const stopSimulation = document.querySelector('#stop-simulation')
+const start_wrapper = document.querySelector('#start-wrapper')
+const stop_wrapper = document.querySelector('#stop-wrapper')
 
 let transmissionRate = 5 //kbps 
 let bucketSize = 400  //400kbps
@@ -28,6 +33,8 @@ function randomFlow(){
     }
 }
 
+
+
 function updateDataLeft(){
     dataSize-=transmissionRate;
     if(dataSize<0){dataLeft.value=0}
@@ -37,7 +44,7 @@ function updateDataLeft(){
 }
 
 function setBucketTransmissionRate(e){
-    bucketTransmissionBar.value = e.target.value;
+    bucketTransmissionRate = e.target.value;
 }
 
 function drawRect(c,x,y,w,h,colour){
@@ -107,7 +114,23 @@ function sendToHost(){
     }
 }
 
-bucketTransmissionBar.addEventListener('change',(e)=>{setBucketTransmissionRate(e)})
+function createLost(){
+    
+}
 
-sendToBucket();
-sendToHost()
+
+
+function start(){
+    start_wrapper.style.display = "none"
+    stop_wrapper.style.display = "flex"
+    sendToBucket();
+    sendToHost()    
+}
+function stop(){
+    location.reload()
+}
+
+startSimulation.addEventListener('click',()=>{start()})
+stopSimulation.addEventListener('click',()=>{stop()})
+bucketTransmissionBar.addEventListener('change',(e)=>{setBucketTransmissionRate(e)})
+totalDataSize.addEventListener('change',(e)=>{dataSize = e.target.value})

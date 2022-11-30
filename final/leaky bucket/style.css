@@ -135,7 +135,7 @@ sans-serif;
     border-radius: 1rem;
     position: relative;
   }
-  input{
+  .input{
     background-color: #0074d9;
     border: 1px black solid;
     border-radius: 1rem;
@@ -144,4 +144,7 @@ sans-serif;
     padding: .5rem;
     font-size: 1rem;
     margin: 5px;
+  }
+  #stop-wrapper{
+    display: none;
   }

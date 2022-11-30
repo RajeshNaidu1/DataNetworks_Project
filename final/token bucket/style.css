@@ -136,6 +136,7 @@ sans-serif;
 
   .to-bucket{
     background-color: yellow;
+    color: black;
     left: calc(25% + 72.5px);
     /* top:200px; */
   }
@@ -182,7 +183,7 @@ sans-serif;
     border-radius: 1rem;
     position: relative;
   }
-  input{
+  .input{
     background-color: #0074d9;
     border: 1px black solid;
     border-radius: 1rem;
@@ -197,4 +198,7 @@ sans-serif;
     width: 100%;
     justify-content: space-between;
     align-items: center;
+  }
+  #stop-wrapper{
+    display: none;
   }
