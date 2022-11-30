@@ -1,13 +1,19 @@
 const sender = document.querySelector(".sender")
 const reciever = document.querySelector(".reciever")
 const main = document.querySelector(".goback-N")
+const start_btn = document.querySelector("#start-simulation")
+const stop_btn = document.querySelector("#stop-simulation")
+const stop_wrapper = document.querySelector("#stop-wrapper")
+const start_wrapper = document.querySelector("#start-wrapper")
 
-const e2e_delay = document.getElementById('e2e-delay')
-let packet_speed,time_out;
+
+
+const packet_speed_bar = document.getElementById('packet-speed')
+let packet_speed,time_out,shouldSend=true;
 const time_out_bar = document.getElementById('Time-out')
 console.log(time_out_bar)
 
-e2e_delay.addEventListener('change',(e)=>{
+packet_speed_bar.addEventListener('change',(e)=>{
     packet_speed = e.target.value/10
 })
 
@@ -147,7 +153,8 @@ class Sender{
             this.packet_sent++;
             if(this.expected_acknowledgement_no == this.size){ this.expected_acknowledgement_no = 0;}
             else this.expected_acknowledgement_no ++
-            this.sendPacket();
+            if(shouldSend==true) this.sendPacket();
+            else this.timer.stop()
             this.Window.slideWindow(this.packet_sent);
         }
         else{
@@ -252,10 +259,10 @@ class Reciever{
             if(this.ackNo<sendingHost.size) this.ackNo++
             else this.ackNo = 0
         }
-        else{
-            if(this.ackNo==1) this.retransmitAcknowledgement(0);
-            else this.retransmitAcknowledgement(1)
-        }
+        // else{
+        //     if(this.ackNo==1) this.retransmitAcknowledgement(0);
+        //     else this.retransmitAcknowledgement(1)
+        // }
     }
     updatePackets(){
         const packets = this.element.querySelectorAll(".block.empty")
@@ -276,36 +283,30 @@ const sendingHost = new Sender({size:4,timer_out:time_out})
 const recievingHost = new Reciever({size:3})
 
 
-const id = setInterval(()=>{
-    console.log(sendingHost.packet_sent)
-    if(sendingHost.packet_sent==16){clearInterval(id)}
-    sendingHost.sendPacket();
-},[1000/2])
-
-
-class goBackN{
-    constructor(){
-        this.packetSent = 0
-        this.packetRecieved = 0
-        this.sentPackets = []
-        this.slideCount = 0
-    }
-    slideHosts(){
-
-    }
-    resetHostParams(){
-
-    }
-    start(){
-
-    }
-    stop(){
-
-    }
+function start(){
+    start_wrapper.style.display = 'none'
+    stop_wrapper.style.display = 'flex'
+    const id = setInterval(()=>{
+        if(sendingHost.packet_sent==16){stop();clearInterval(id)}
+        sendingHost.sendPacket();
+    })
 }
 
+function stop(){
+    location.reload()
+    // shouldSend = false
+    // start_wrapper.style.display = 'initial'
+    // stop_wrapper.style.display = "none"
+}
 
 // const timer = new Timer({value:13,x:30})
 // main.append(timer.element)
 // timer.start()
 
+start_btn.addEventListener('click',()=>{
+    start()
+})
+
+stop_btn.addEventListener('click',()=>{
+    stop()
+})

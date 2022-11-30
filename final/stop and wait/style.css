@@ -125,6 +125,7 @@
     display: flex;
     gap: 0.5rem;
     margin: 1rem;
+    align-items: center;
   }
   label{
     font-size: 13px;
@@ -178,4 +179,15 @@
     width: 30px;
     left: 8px;
     border-radius: 50%;
+  }
+  .input-btn{
+    width: 60px;
+    height: 35px;
+    background-color: #0074d9;
+    border: 1px solid black;
+    border-radius: 1rem;
+    margin: 5px;
+  }
+  #stop-wrapper{
+    display: none;
   }

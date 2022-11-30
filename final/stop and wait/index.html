@@ -18,8 +18,8 @@
                 </div>
                 <div class="buttons">
                     <div class="input-bar">
-                        <label>e2e delay</label>
-                        <input class="input" value="10" id="e2e-delay">
+                        <label>Packet speed</label>
+                        <input class="input" value="10" id="packet-speed">
                     </div>
                     <div class="input-bar">
                         <label>Time Out</label>
@@ -27,7 +27,15 @@
                     </div>
                     <div class="input-bar">
                         <label>window Size</label>
-                        <input class="input" value="1" id="window-size">
+                        <input class="input" value="1" id="window-size" disabled>
+                    </div>
+                    <div class="input-bar" id="start-wrapper">
+                        <label>Start sim..</label>
+                        <button class="input-btn" id="start-simulation">Start</button>
+                    </div>
+                    <div class="input-bar" id = "stop-wrapper">
+                        <label>Stop sim..</label>
+                        <button class="input-btn" id="stop-simulation">Stop</button>
                     </div>
                 </div>
                 <section class="simulation">
