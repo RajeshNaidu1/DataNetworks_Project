@@ -4,14 +4,16 @@ const main = document.querySelector(".goback-N")
 
 const e2e_delay = document.getElementById('e2e-delay')
 let packet_speed,time_out;
-const timerOut = document.getElementById('Time-out')
+const time_out_bar = document.getElementById('Time-out')
+console.log(time_out_bar)
 
 e2e_delay.addEventListener('change',(e)=>{
-    packet_speed = Math.max(e.target.value/10,0.5)
+    packet_speed = e.target.value/10
 })
 
-timerOut.addEventListener('change',(e)=>{
+time_out_bar.addEventListener('change',(e)=>{
     time_out = e.target.value
+    console.log(time_out)
 })
 
 class Packet{
@@ -71,12 +73,12 @@ class Window{
 class Sender{
     constructor(obj){
         this.size = 1
-        this.timerOut = obj.timerOut||15  
+        this.time_out = time_out  
         this.xPos = 0
         this.packet_sent = 0
         this.packet_sent_successfully = 0
         this.sent = []
-        this.expected_acknowledgement_no = 0
+        this.expected_acknowledgement_no = 1
         this.initialize()
     }
     initialize(){
@@ -91,15 +93,14 @@ class Sender{
             else this.seqNo++
             this.element.append(packet.element)
         }
-
+        this.seqNo = 0;
     }
     sendPacket(){
         // window full condition 
         if(this.sent.length<this.size){
+            console.log(this.time_out)
             // this.slideHost();
-            console.log(this.xPos)
-
-            this.timer = new Timer({value:this.timerOut,x:this.xPos*30})
+            this.timer = new Timer({time_out:time_out,x:this.xPos*30})
             this.timer.start()
             // recievingHost.slideHost(this.packetSent);
             const packet = new Packet({type:"recieve",seqNo:this.seqNo,x:this.xPos,dy:packet_speed})
@@ -126,8 +127,15 @@ class Sender{
 
     retransmitPackets(){
         for(let i in this.sent){
-            const packet = new Packet({type:"recieve",seqNo:this.sent[i].seqNo})
+            console.log(this.sent[i])
+            const packet = new Packet({type:"recieve",seqNo:this.sent[i].seqNo,x:this.sent[i].x})
+            this.timer.stop()
+            this.timer = new Timer({time_out:time_out,x:this.sent[i].x*30})
+            this.startTimer()
+            this.timer.start()
             main.appendChild(packet.element)
+            main.appendChild(this.timer.element)
+            console.log(this.timer)
             packet.sendToReciver()
         }
     }
@@ -135,14 +143,12 @@ class Sender{
         if(packet.ackNo==this.expected_acknowledgement_no){
             this.xPos++
             this.sent.splice(0, 1);
-
-            console.log(this.sent)
             this.timer.element.remove();
             this.packet_sent++;
-            if(this.expected_acknowledgement_no==this.size){ this.expected_acknowledgement_no = 0;}
+            if(this.expected_acknowledgement_no == this.size){ this.expected_acknowledgement_no = 0;}
             else this.expected_acknowledgement_no ++
             this.sendPacket();
-            this.Window.slideWindow(this.packet_sent)
+            this.Window.slideWindow(this.packet_sent);
         }
         else{
             this.retransmitPackets();
@@ -150,7 +156,7 @@ class Sender{
     }
     startTimer(){
         const id = requestAnimationFrame(()=>this.startTimer())
-        if(this.timerOut==this.timer.currentTime){
+        if(time_out==this.timer.currentTime){
             cancelAnimationFrame(id);
             this.timer.stop();
             this.retransmitPackets();
@@ -163,13 +169,19 @@ class Sender{
 
 class Timer{
     constructor(obj){
-        this.value = obj.value
+        console.log(obj)
+        this.time_out = obj.time_out
         this.currentTime = 0
         this.x = obj.x
         this.y = 0
         this.element = document.createElement("canvas")
         this.element.width = 30
         this.element.height = 30
+        this.element.classList.add("timer")
+        this.element.style.transform = `translateX(${this.x}px)`
+        this.context()
+    }
+    context(){
         this.context = this.element.getContext('2d');
         this.context.beginPath()
         this.context.textAlign                = 'center';
@@ -181,8 +193,6 @@ class Timer{
         this.context.lineTo(this.x,this.y); 
         this.context.fill();
         this.context.stroke();
-        this.element.classList.add("timer")
-        this.element.style.transform = `translateX(${this.x}px)`
     }
     start(){
         setTimeout(()=>{
@@ -191,7 +201,7 @@ class Timer{
             this.context.arc(this.x, this.y, this.radius, (Math.PI*1.5), (Math.PI)*(this.currentTime/this.value)+(Math.PI*1.5), true);
             const id = requestAnimationFrame(()=>this.start())
             this.currentTime+=0.125
-            if(this.value==this.currentTime){
+            if(this.time_out==this.currentTime){
                 cancelAnimationFrame(id)
                 this.stop();
             }
@@ -205,9 +215,9 @@ class Timer{
 class Reciever{
     constructor(){
         this.size = 1
-        this.ackNo = 0 
-        this.packetNo = 0
-        this.packetRecieved = 0
+        this.ackNo = 1 
+        this.packet_no = 0
+        this.packet_recieved = 0
         this.element = reciever
         this.initialize()
     }
@@ -224,39 +234,36 @@ class Reciever{
 
     }
     sendAcknowledgement(){
-        const packet = new Packet({type:"ack",seqNo:this.ackNo,x:this.packetNo,dy:packet_speed});
+        const packet = new Packet({type:"ack",seqNo:this.ackNo,x:this.packet_recieved,dy:packet_speed});
         this.updatePackets();
+        this.packet_recieved++;
         this.slideWindow();
         main.append(packet.element)
         packet.sendToHost();
-        //add condition here
-        this.packetNo++
     }
-    retransmitAcknowledgement(){
-        const packet = new Packet({type:"ack",seqNo:this.ackNo,x:this.packetNo,dy:packet_speed});
+    retransmitAcknowledgement(ack){
+        const packet = new Packet({type:"ack",seqNo:ack,x:this.packet_recieved,dy:packet_speed});
         main.append(packet.element)
         packet.sendToHost();
     }
     recievePacket(packet){
-        console.log("recieved:",packet.seqNo,this.ackNo)
-        if(packet.seqNo==this.ackNo){
-            this.packetRecieved++;
-            // this.slideHost();
+        if(packet.seqNo!=this.ackNo){
             this.sendAcknowledgement();
+            if(this.ackNo<sendingHost.size) this.ackNo++
+            else this.ackNo = 0
         }
         else{
-            this.retransmitAcknowledgement();
+            if(this.ackNo==1) this.retransmitAcknowledgement(0);
+            else this.retransmitAcknowledgement(1)
         }
-        if(this.ackNo<sendingHost.size) this.ackNo++
-        else this.ackNo = 0
     }
     updatePackets(){
         const packets = this.element.querySelectorAll(".block.empty")
         packets[0].classList.replace("empty","recieved")
-        packets[0].innerHTML = this.ackNo
+        packets[0].innerHTML = this.ackNo==0?1:0
     }
     slideWindow(){
-        this.Window.slideWindow(this.packetRecieved)
+        this.Window.slideWindow(this.packet_recieved)
     }
     slideHost(x){
         if(Math.floor(this.packetNo*30)>=450){
@@ -265,7 +272,7 @@ class Reciever{
     }
 }
 
-const sendingHost = new Sender({size:4,timerOut:time_out})
+const sendingHost = new Sender({size:4,timer_out:time_out})
 const recievingHost = new Reciever({size:3})
 
 
@@ -274,6 +281,7 @@ const id = setInterval(()=>{
     if(sendingHost.packet_sent==16){clearInterval(id)}
     sendingHost.sendPacket();
 },[1000/2])
+
 
 class goBackN{
     constructor(){
