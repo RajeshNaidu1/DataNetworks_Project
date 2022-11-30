@@ -11,6 +11,11 @@ const tokenBar = document.querySelector("#token-count");
 
 const dataSizeBar = document.querySelector("#Data-Size")
 
+const startWrapper = document.querySelector('#start-wrapper')
+const stopWrapper = document.querySelector('#stop-wrapper')
+const startSimualtion = document.querySelector('#start-simulation')
+const stopSimualtion = document.querySelector('#stop-simulation')
+
 const Main = document.querySelector('.token-bucket');
 
 const queue = [];//stores the packets sent from sender
@@ -293,14 +298,29 @@ const c = setInterval(()=>{
 },[1000/5])
 
 //bucket to reciever packet here
-const d = setInterval(()=>{
-    if(dataLeft.value<=0 && recieved.length==0 && queue.length==0){clearInterval(d)}
-    createRecieverPackets();
-},[1000/10])
 
 setInterval(()=>{
     console.log("queue:",queue);
     console.log("recieved:",recieved)
 },[1000])
 
+function start(){
+    stopWrapper.style.display = "flex"
+    startWrapper.style.display = "none"
+    const d = setInterval(()=>{
+        if(dataLeft.value<=0 && recieved.length==0 && queue.length==0){clearInterval(d)}
+        createRecieverPackets();
+    },[1000/10])    
+}
 
+function stop(){
+    location.reload()
+}
+
+startSimualtion.addEventListener('click',(e)=>{
+    start();
+})
+
+stopSimualtion.addEventListener('click',(e)=>{
+    stop();
+})
