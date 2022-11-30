@@ -141,18 +141,17 @@ class Sender{
             this.timer.start()
             main.appendChild(packet.element)
             main.appendChild(this.timer.element)
-            console.log(this.timer)
             packet.sendToReciver()
         }
     }
     recieveAcknowledgment(packet){
         if(packet.ackNo==this.expected_acknowledgement_no){
             this.xPos++
-            this.sent.splice(0, 1);
             this.timer.element.remove();
             this.packet_sent++;
             if(this.expected_acknowledgement_no == this.size){ this.expected_acknowledgement_no = 0;}
             else this.expected_acknowledgement_no ++
+            this.sent.splice(0, 1);
             if(shouldSend==true) this.sendPacket();
             else this.timer.stop()
             this.Window.slideWindow(this.packet_sent);
@@ -259,10 +258,10 @@ class Reciever{
             if(this.ackNo<sendingHost.size) this.ackNo++
             else this.ackNo = 0
         }
-        // else{
-        //     if(this.ackNo==1) this.retransmitAcknowledgement(0);
-        //     else this.retransmitAcknowledgement(1)
-        // }
+        else{
+            if(this.ackNo==1) this.retransmitAcknowledgement(0);
+            else this.retransmitAcknowledgement(1)
+        }
     }
     updatePackets(){
         const packets = this.element.querySelectorAll(".block.empty")
