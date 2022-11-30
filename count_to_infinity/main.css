@@ -1,0 +1,31 @@
+body{
+    background-color: rgb(157, 252, 204);
+}
+.playground{
+    display: flex;
+    justify-content: space-between;
+    font-size: 3rem;
+}
+.connections{
+    display: flex;
+    margin-top: 0px;
+    justify-content: space-between;
+}
+.insideB{
+    display: flex;
+}
+h5{
+    margin-top: 0px;
+    margin-bottom: 40px;
+}
+table{
+    font-size: 1.4rem;
+    width:200px;
+    height:100px;
+}
+table, th, td {
+    border: 1px solid black;
+}
+.solution{
+    text-align: center;
+}
