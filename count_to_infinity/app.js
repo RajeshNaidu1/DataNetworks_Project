@@ -14,6 +14,12 @@ const second_line=document.getElementById('second-line')
 const first_line=document.getElementById('first-line')
 
 const modalMessage=document.querySelector(".myModal h1")
+let infinity;
+const infinityBar=document.getElementById("infinity")
+
+infinityBar.addEventListener('change',(e)=>{
+    infinity=e.target.value
+})
 
 var c=0;
 let tableA = 0; 
@@ -37,7 +43,7 @@ function action1(){
     if(c==0||c==1){
         tableC+=1;
         if(c==0&&tableC==10000000000) cancelAnimationFrame(id)
-        if(c==1&&tableC==16) cancelAnimationFrame(id)
+        if(c==1&&tableC==infinity) cancelAnimationFrame(id)
     }
     if(c==2){
         dist3[0].innerHTML = "Not Reachable";
@@ -55,7 +61,7 @@ function action2(){
     if(c==0||c==1){
         tableA+=1;
         if(c==0&&tableA==10000000000) cancelAnimationFrame(id)
-        if(c==1&&tableA==16) cancelAnimationFrame(id)
+        if(c==1&&tableA==infinity) cancelAnimationFrame(id)
     }
     if(c==2){
         dist1[0].innerHTML = "Not Reachable";

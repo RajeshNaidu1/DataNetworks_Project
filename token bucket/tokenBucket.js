@@ -29,7 +29,7 @@ let id;
 let transmissionRate = 5 //kbps 
 let bucketSize = 400  
 let currentSize = 0
-let dataSize = 500
+let dataSize = dataSizeBar.value
 let bucketTransmissionRate = 2
 let maximumTransmissionRate = 15 //maximum 7mbps 
 let packetQueued = 0
@@ -41,7 +41,7 @@ let yt = 0;
 let totalTokens = 5;
 let tokenQueued = 0;
 let currentTokens = 3;
-
+dataLeft.value = dataSize
 class LostPacket{
     constructor(obj){
         this.size = obj.size;

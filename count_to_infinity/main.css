@@ -29,3 +29,23 @@ table, th, td {
 .solution{
     text-align: center;
 }
+.input-bar{
+    display: inline;
+    align-items: center;
+    color: white;
+    background-color: #1bfff751;
+    padding: .5rem;
+    padding-top: 1.5rem;
+    border-radius: 1rem;
+    position: relative;
+  }
+  .input{
+    background-color: #0074d9;
+    border: 1px black solid;
+    border-radius: 1rem;
+    width: 100px;
+    text-align: center;
+    padding: .5rem;
+    font-size: 1rem;
+    margin: 5px;
+  }
