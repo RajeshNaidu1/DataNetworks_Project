@@ -148,21 +148,6 @@ nav{
         <a class="button" href="./goBackN/index.html">Click Here</a>
     </p>
 </div>
-<div id="selective" class="container selective-repeat">
-    <h1>Selective Repeat</h1>
-    <p>
-      This protocol(SRP) is mostly identical to GBN protocol, except that buffers are used and the receiver, and the sender, each maintains a window of size. SRP works better when the link is very unreliable. Because in this case, retransmission tends to happen more frequently, selectively retransmitting frames is more efficient than retransmitting all of them. SRP also requires full-duplex link. backward acknowledgements are also in progress.
-      <br><br>
-      Sender's Windows ( Ws) = Receiver's Windows ( Wr).<br>
-      Window size should be less than or equal to half the sequence number in SR protocol. This is to avoid packets being recognized incorrectly. If the size of the window is greater than half the sequence number space, then if an ACK is lost, the sender may send new packets that the receiver believes are retransmissions.<br>
-      Sender can transmit new packets as long as their number is with W of all unACKed packets.<br>
-      Sender retransmit un-ACKed packets after a timeout - Or upon a NAK if NAK is employed.<br>
-      Receiver ACKs all correct packets.<br>
-      Receiver stores correct packets until they can be delivered in order to the higher layer.<br>
-      In Selective Repeat ARQ, the size of the sender and receiver window must be at most one-half of 2^m.<br><br>
-      <a class="button" href="#">Click Here</a>
-      </p>
-</div>
 <div id="csma-cd" class="container CSMA_CD">
     <h1>CSMA/CD</h1>
     <p>

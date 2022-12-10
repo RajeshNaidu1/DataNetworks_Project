@@ -8,6 +8,26 @@
   text-align: center;
   font-size: calc(10px + 2vmin);
 }
+.static{
+  position: absolute;
+  right: 60px;
+}
+nav{
+  position: sticky;
+  top: 0;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  transition: top 0.3s; /* Transition effect when sliding down (and up) */
+  width: 100%;
+  padding: 0 2rem;
+  box-sizing: border-box;
+  background-color: rgba(25, 167, 136, 0.692);
+}
+body{
+  background-color: #282c34;
+}
+
 
 
 *{
