@@ -34,8 +34,7 @@ table, th, td {
     align-items: center;
     color: white;
     background-color: #1bfff751;
-    padding: .5rem;
-    padding-top: 1.5rem;
+    padding:1.5rem .5rem;
     border-radius: 1rem;
     position: relative;
   }
